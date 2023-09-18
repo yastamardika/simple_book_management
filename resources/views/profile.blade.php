@@ -42,7 +42,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-4">
                             <div class="card-profile-stats">
                                 <span class="heading">22</span>
@@ -61,7 +61,7 @@
                                 <span class="description">Comments</span>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 
@@ -105,6 +105,23 @@
                                     <div class="form-group">
                                         <label class="form-control-label" for="email">Email address<span class="small text-danger">*</span></label>
                                         <input type="email" id="email" class="form-control" name="email" placeholder="example@example.com" value="{{ old('email', Auth::user()->email) }}">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="email">Day of Birth<span class="small text-danger">*</span></label>
+                                        <input type="date" id="day_of_birth" class="form-control" name="day_of_birth" value="{{ old('day_of_birth', Auth::user()->day_of_birth) }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="email">phone_number<span class="small text-danger">*</span></label>
+                                        <input type="text" id="phone_number" class="form-control" name="phone_number" value="{{ old('day_of_birth', Auth::user()->phone_number) }}">
                                     </div>
                                 </div>
                             </div>

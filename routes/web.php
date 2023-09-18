@@ -20,11 +20,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
+//Route for Administrator
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::put('/profile', 'ProfileController@update')->name('profile.update');
+Route::resource('/books', 'BooksController');
 
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
+Route::middleware(['auth', 'role:administrator'])->group(function () {
+    Route::delete('/user/{id}', 'UserController@destroy')->name('user.destroy');
+    Route::resource('/users', 'UserController');
+    Route::get('/allbooks', 'BooksController@allbook')->name('books.allbook');
+});
