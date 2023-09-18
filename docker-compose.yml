@@ -1,0 +1,53 @@
+version: "3.9"
+
+networks:
+    laravel:
+        name: laravel
+
+services:
+
+    php:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: php
+        volumes:
+            - ./src:/var/www/html
+        networks:
+            - laravel
+
+    mysql:
+        image: mysql:8.0.27
+        container_name: mysql
+        ports:
+            - 3306:3306
+        volumes:
+            - ./mysql:/var/lib/mysql
+        environment:
+            MYSQL_DATABASE: simplebookdb
+            MYSQL_USER: user
+            MYSQL_PASSWORD: secret
+            MYSQL_ROOT_PASSWORD: secret
+        networks:
+            - laravel
+
+    composer:
+        image: composer:latest
+        container_name: composer
+        volumes:
+            - ./src:/var/www/html
+        working_dir: /var/www/html
+        networks:
+            - laravel
+
+    artisan:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: artisan
+        volumes:
+            - ./src:/var/www/html
+        working_dir: /var/www/html
+        entrypoint: ['php', 'artisan']
+        networks:
+            - laravel
